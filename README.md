@@ -15,7 +15,7 @@ to show how these tools work under the hood.
 ## Try it in 30 seconds
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/dq-monitor && cd dq-monitor
+git clone https://github.com/Kofo-pix/dq-monitor && cd dq-monitor
 make demo           # or: PYTHONPATH=src python -m dqmon demo
 ```
 

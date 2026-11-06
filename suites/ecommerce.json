@@ -1,0 +1,40 @@
+{
+  "name": "ecommerce_orders",
+  "source": {"type": "sqlite", "path": "demo_output/source.db"},
+  "checks": [
+    {"type": "row_count", "table": "customers", "min_rows": 1},
+    {"type": "schema", "table": "customers", "expected": {
+        "customer_id": "INTEGER", "name": "TEXT", "email": "TEXT", "country": "TEXT", "signup_date": "TEXT"}},
+    {"type": "schema_drift", "table": "customers"},
+    {"type": "unique", "table": "customers", "column": "customer_id"},
+    {"type": "not_null", "table": "customers", "column": "customer_id"},
+    {"type": "not_null", "table": "customers", "column": "email"},
+    {"type": "regex", "table": "customers", "column": "email",
+     "pattern": "^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}$", "severity": "warn"},
+    {"type": "allowed_values", "table": "customers", "column": "country",
+     "values": ["US", "NG", "GB", "DE", "IN"], "severity": "warn"},
+    {"type": "null_rate_drift", "table": "customers", "column": "email", "max_increase_pp": 5, "severity": "warn"},
+    {"type": "row_count_anomaly", "table": "customers", "max_change_pct": 30},
+
+    {"type": "row_count", "table": "orders", "min_rows": 1},
+    {"type": "schema", "table": "orders", "expected": {
+        "order_id": "INTEGER", "customer_id": "INTEGER", "order_date": "TEXT",
+        "status": "TEXT", "amount": "REAL", "currency": "TEXT"}},
+    {"type": "schema_drift", "table": "orders"},
+    {"type": "unique", "table": "orders", "column": "order_id"},
+    {"type": "not_null", "table": "orders", "column": "order_id"},
+    {"type": "not_null", "table": "orders", "column": "customer_id"},
+    {"type": "not_null", "table": "orders", "column": "order_date"},
+    {"type": "referential_integrity", "table": "orders", "column": "customer_id",
+     "ref_table": "customers", "ref_column": "customer_id"},
+    {"type": "allowed_values", "table": "orders", "column": "status",
+     "values": ["pending", "shipped", "completed", "cancelled", "returned"]},
+    {"type": "allowed_values", "table": "orders", "column": "currency",
+     "values": ["USD", "NGN", "GBP", "EUR"], "severity": "warn"},
+    {"type": "range", "table": "orders", "column": "amount", "min_value": 0, "max_value": 10000},
+    {"type": "freshness", "table": "orders", "column": "order_date", "max_age_days": 1.5},
+    {"type": "row_count_anomaly", "table": "orders", "max_change_pct": 30},
+    {"type": "custom_sql", "name": "orders_placed_before_customer_signup", "severity": "warn",
+     "sql": "SELECT o.* FROM orders o JOIN customers c ON c.customer_id = o.customer_id WHERE o.order_date < c.signup_date"}
+  ]
+}

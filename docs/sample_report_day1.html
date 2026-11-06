@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data quality report - ecommerce_orders</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1d2330;--muted:#667085;--line:#e4e7ec;--ok:#12805c;--okbg:#e6f6ef;
+--bad:#b42318;--badbg:#fdeceb;--warn:#a15c07;--warnbg:#fff4de;--skip:#667085;--skipbg:#eef0f3;--accent:#3b5bdb}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#171c24;--text:#e6e9ef;--muted:#98a2b3;--line:#2a313c;
+--ok:#4ad19b;--okbg:#10291f;--bad:#ff8a80;--badbg:#341613;--warn:#f5b94c;--warnbg:#33260c;--skip:#98a2b3;--skipbg:#222a35;--accent:#8aa4ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);
+font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:24px}
+.wrap{max-width:1080px;margin:0 auto}h1{font-size:22px;margin:0}h2{font-size:16px;margin:28px 0 10px}
+.sub{color:var(--muted);font-size:13px;margin-top:2px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.gate{padding:6px 16px;border-radius:999px;font-weight:700;font-size:14px}
+.gate.ok{background:var(--okbg);color:var(--ok)}.gate.bad{background:var(--badbg);color:var(--bad)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi b{display:block;font-size:24px}.kpi span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}.tag{display:inline-block;min-width:52px;text-align:center;padding:2px 8px;
+border-radius:6px;font-size:12px;font-weight:700}
+.PASS{background:var(--okbg);color:var(--ok)}.FAIL,.ERROR{background:var(--badbg);color:var(--bad)}
+.WARN{background:var(--warnbg);color:var(--warn)}.SKIP{background:var(--skipbg);color:var(--skip)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+details summary{cursor:pointer;color:var(--accent);font-size:12.5px;margin-top:4px}
+.mini{margin-top:6px;font-size:12px}.mini td,.mini th{padding:4px 8px;border:1px solid var(--line)}
+.trend{padding:14px}.legend{color:var(--muted);font-size:12px;margin-top:6px}
+</style></head>
+<body><div class="wrap">
+<div class="head"><div><h1>Data quality report: ecommerce_orders</h1>
+<div class="sub">Run #1 &middot; as of 2025-03-01 12:00</div></div>
+<div class="gate ok">GATE PASSED</div></div>
+<div class="kpis">
+<div class="kpi"><b>100%</b><span>Quality score</span></div>
+<div class="kpi"><b>19</b><span>Passed</span></div>
+<div class="kpi"><b>0</b><span>Blocking failures</span></div>
+<div class="kpi"><b>0</b><span>Warnings</span></div>
+<div class="kpi"><b>5</b><span>Skipped</span></div></div>
+<h2>Quality trend</h2><div class="card trend"><svg viewBox="0 0 1000 120" width="100%" role="img" aria-label="Quality score by run"><g><title>Run #1: 100.0% | gate passed</title><rect x="472.0" y="20.0" width="56.0" height="80.0" rx="4" fill="var(--ok)" opacity=".85"/><text x="500.0" y="16.0" text-anchor="middle" font-size="12" fill="currentColor">100%</text><text x="500.0" y="116" text-anchor="middle" font-size="11" fill="var(--muted)">#1</text></g></svg><div class="legend">Quality score per run. Red = run blocked by error-level failures.</div></div>
+<h2>Check results (24)</h2>
+<div class="card scroll"><table><tr><th>Status</th><th>Check</th><th>Severity</th><th>Details</th></tr>
+<tr><td><span class="tag SKIP">SKIP</span></td><td><code>null_rate_drift:customers.email</code></td><td>warn</td><td>no history yet; baseline recorded</td></tr><tr><td><span class="tag SKIP">SKIP</span></td><td><code>row_count_anomaly:customers</code></td><td>error</td><td>no history yet; baseline recorded</td></tr><tr><td><span class="tag SKIP">SKIP</span></td><td><code>schema_drift:customers</code></td><td>error</td><td>no previous snapshot; baseline recorded</td></tr><tr><td><span class="tag SKIP">SKIP</span></td><td><code>row_count_anomaly:orders</code></td><td>error</td><td>no history yet; baseline recorded</td></tr><tr><td><span class="tag SKIP">SKIP</span></td><td><code>schema_drift:orders</code></td><td>error</td><td>no previous snapshot; baseline recorded</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>orders_placed_before_customer_signup</code></td><td>warn</td><td>0 violating rows returned by custom query</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>allowed_values:customers.country</code></td><td>warn</td><td>0 of 500 rows (0.00%) have a country outside the allowed set</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>not_null:customers.customer_id</code></td><td>error</td><td>0 of 500 rows (0.00%) have a missing customer_id</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>not_null:customers.email</code></td><td>error</td><td>0 of 500 rows (0.00%) have a missing email</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>regex:customers.email</code></td><td>warn</td><td>0 of 500 rows (0.00%) have a malformed email</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>row_count:customers</code></td><td>error</td><td>500 rows (expected 1 to +inf)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>schema:customers</code></td><td>error</td><td>schema matches contract (5 columns)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>unique:customers.customer_id</code></td><td>error</td><td>0 of 500 rows (0.00%) share a duplicate customer_id</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>allowed_values:orders.currency</code></td><td>warn</td><td>0 of 2000 rows (0.00%) have a currency outside the allowed set</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>allowed_values:orders.status</code></td><td>error</td><td>0 of 2000 rows (0.00%) have a status outside the allowed set</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>freshness:orders.order_date</code></td><td>error</td><td>latest order_date = 2025-03-01 (0.5 days old, limit 1.5)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>not_null:orders.customer_id</code></td><td>error</td><td>0 of 2000 rows (0.00%) have a missing customer_id</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>not_null:orders.order_date</code></td><td>error</td><td>0 of 2000 rows (0.00%) have a missing order_date</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>not_null:orders.order_id</code></td><td>error</td><td>0 of 2000 rows (0.00%) have a missing order_id</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>range:orders.amount</code></td><td>error</td><td>0 of 2000 rows (0.00%) have amount outside [0, 10000]</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>referential_integrity:orders.customer_id</code></td><td>error</td><td>0 of 2000 rows (0.00%) are orphans (no matching customers.customer_id)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>row_count:orders</code></td><td>error</td><td>2000 rows (expected 1 to +inf)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>schema:orders</code></td><td>error</td><td>schema matches contract (6 columns)</td></tr><tr><td><span class="tag PASS">PASS</span></td><td><code>unique:orders.order_id</code></td><td>error</td><td>0 of 2000 rows (0.00%) share a duplicate order_id</td></tr></table></div>
+</div></body></html>
